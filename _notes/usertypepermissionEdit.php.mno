@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_UserTypePermissionQuery" value="name:UserTypeId;datatype:int,name:LogToWeb;datatype:int,name:LogToProgram;datatype:int,name:ViewUserTypes;datatype:int,name:CreateUserTypes;datatype:int,name:ViewUsers;datatype:int,name:CreateUsers;datatype:int,name:ViewStations;datatype:int,name:CreateStations;datatype:int,name:ViewLoginLog;datatype:int,name:ViewSummary;datatype:int,name:ViewTransactions;datatype:int,name:ViewStats;datatype:int,name:ViewVehicleTypes;datatype:int,name:CreateVehicleTypes;datatype:int,name:CanCheckOut;datatype:int,name:CanPrintReportZ;datatype:int,name:CanPrintReportX;datatype:int" />
+</info>

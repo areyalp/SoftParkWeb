@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_UserEditQuery" value="name:Id;datatype:int,name:UserTypeId;datatype:int,name:Passport;datatype:string,name:FirstName;datatype:string,name:LastName;datatype:string,name:Email;datatype:string,name:MobilePhone;datatype:string,name:Login;datatype:string,name:Password;datatype:string,name:CreatedDate;datatype:datetime,name:Status;datatype:int" />
+	<infoitem key="UD_UserTypeQuery" value="name:Id;datatype:int,name:Name;datatype:string,name:Description;datatype:string" />
+</info>

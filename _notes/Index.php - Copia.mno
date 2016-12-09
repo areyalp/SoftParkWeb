@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_AccessUserQuery" value="name:Id;datatype:int,name:UserTypeId;datatype:int,name:Passport;datatype:string,name:FirstName;datatype:string,name:LastName;datatype:string,name:Email;datatype:string,name:MobilePhone;datatype:string,name:Login;datatype:string,name:Password;datatype:string,name:CreatedDate;datatype:datetime,name:Status;datatype:int" />
+	<infoitem key="UD_AccesUserType" value="name:Id;datatype:int,name:Name;datatype:string,name:Description;datatype:string" />
+	<infoitem key="UD_AccessUserAccessType" value="name:Id;datatype:int,name:Name;datatype:string" />
+	<infoitem key="UD_userTypePermission" value="name:UserTypeId;datatype:int,name:LogToWeb;datatype:int,name:LogToProgram;datatype:int,name:ViewUserTypes;datatype:int,name:CreateUserTypes;datatype:int,name:ViewUsers;datatype:int,name:CreateUsers;datatype:int,name:ViewStations;datatype:int,name:CreateStations;datatype:int,name:ViewLoginLog;datatype:int,name:ViewSummary;datatype:int,name:ViewTransactions;datatype:int,name:ViewStats;datatype:int,name:ViewVehicleTypes;datatype:int,name:CreateVehicleTypes;datatype:int,name:CanCheckOut;datatype:int,name:CanPrintReportZ;datatype:int,name:CanPrintReportX;datatype:int" />
+</info>
