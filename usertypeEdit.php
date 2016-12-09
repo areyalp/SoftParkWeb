@@ -58,11 +58,11 @@ $idusertype_usertypeEdit = "0";
 if (isset($_GET['recordID'])) {
   $idusertype_usertypeEdit = $_GET['recordID'];
 }
-mysql_select_db($database_softPark, $softPark);
+# mysql_select_db($database_softPark, $softPark);
 $query_usertypeEdit = sprintf("SELECT * FROM usertype WHERE usertype.Id=%s", GetSQLValueString($idusertype_usertypeEdit, "int"));
-$usertypeEdit = mysql_query($query_usertypeEdit, $softPark) or die(mysql_error());
-$row_usertypeEdit = mysql_fetch_assoc($usertypeEdit);
-$totalRows_usertypeEdit = mysql_num_rows($usertypeEdit);
+$usertypeEdit = $mysqli->query($query_usertypeEdit) or die(mysql_error());
+$row_usertypeEdit = $usertypeEdit->fetch_assoc();
+$totalRows_usertypeEdit = $usertypeEdit->num_rows;
 ?>
 <!doctype html>
 <html>
