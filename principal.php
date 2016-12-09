@@ -28,22 +28,22 @@
                 		<h2>Administracion</h2>
                 	</div><!-- end title -->
                     <div class="options">
-                    	<img src="images/advantagediagram.png">
+                    	<a href="usertypeList.php"><img src="images/advantagediagram.png"></a>
                 	</div>
                     <div class="options">
-                    	<img src="images/advantagediagram.png">
+                    	<a href=""><img src="images/advantagediagram.png"></a>
                 	</div>
                     <div class="options">
-                    	<img src="images/advantagediagram.png">
+                    	<a href=""><img src="images/advantagediagram.png"></a>
                 	</div>
                     <div class="options">
-                    	<img src="images/advantagediagram.png">
+                    	<a href=""><img src="images/advantagediagram.png"></a>
                 	</div>
                     <div class="options">
-                    	<img src="images/advantagediagram.png">
+                    	<a href=""><img src="images/advantagediagram.png"></a>
                 	</div>
                     <div class="options">
-                    	<img src="images/advantagediagram.png">
+                    	<a href=""><img src="images/advantagediagram.png"></a>
                 	</div>
                 </div>
                 

@@ -1,13 +1,14 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($mysqli, $theValue) : mysqli_escape_string($mysqli, $theValue);
 
   switch ($theType) {
     case "text":
@@ -38,17 +39,17 @@ if (isset($_GET['pageNum_userType'])) {
 }
 $startRow_userType = $pageNum_userType * $maxRows_userType;
 
-mysql_select_db($database_softPark, $softPark);
+# mysql_select_db($database_softPark, $softPark);
 $query_userType = "SELECT * FROM usertype ORDER BY usertype.Name ASC";
 $query_limit_userType = sprintf("%s LIMIT %d, %d", $query_userType, $startRow_userType, $maxRows_userType);
-$userType = mysql_query($query_limit_userType, $softPark) or die(mysql_error());
-$row_userType = mysql_fetch_assoc($userType);
+$userTypeResult = $mysqli->query($query_limit_userType) or die(mysqli_error());
+$row_userType = $userTypeResult->fetch_assoc();
 
 if (isset($_GET['totalRows_userType'])) {
   $totalRows_userType = $_GET['totalRows_userType'];
 } else {
-  $all_userType = mysql_query($query_userType);
-  $totalRows_userType = mysql_num_rows($all_userType);
+  $all_userType = $mysqli->query($query_userType);
+  $totalRows_userType = $all_userType->num_rows;
 }
 $totalPages_userType = ceil($totalRows_userType/$maxRows_userType)-1;
 ?>
@@ -94,7 +95,7 @@ $totalPages_userType = ceil($totalRows_userType/$maxRows_userType)-1;
   						    <td><?php echo $row_userType['Description']; ?></td>
   						    <td><a href="usertypeEdit.php?recordID=<?php echo $row_userType['Id']; ?>">Modificar - <a href="usertypeDelete.php?recordID=<?php echo $row_userType['Id']; ?>">Eliminar</td>
 					      </tr>
-  						  <?php } while ($row_userType = mysql_fetch_assoc($userType)); ?>
+  						  <?php } while ($row_userType = $userTypeResult->fetch_assoc()); ?>
 					</table>
 
                         
@@ -112,5 +113,5 @@ $totalPages_userType = ceil($totalRows_userType/$maxRows_userType)-1;
 </body>
 </html>
 <?php
-mysql_free_result($userType);
+mysqli_free_result($userTypeResult);
 ?>

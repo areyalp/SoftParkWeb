@@ -1,13 +1,14 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($mysqli, $theValue) : mysqli_escape_string($mysqli, $theValue);
 
   switch ($theType) {
     case "text":
@@ -31,11 +32,11 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-mysql_select_db($database_softPark, $softPark);
+# mysql_select_db($database_softPark, $softPark);
 $query_userQuery = "SELECT * FROM users";
-$userQuery = mysql_query($query_userQuery, $softPark) or die(mysql_error());
-$row_userQuery = mysql_fetch_assoc($userQuery);
-$totalRows_userQuery = mysql_num_rows($userQuery);
+$userQuery = $mysqli->query($query_userQuery) or die(mysqli_error());
+$row_userQuery = $userQuery->fetch_assoc();
+$totalRows_userQuery = $userQuery->num_rows;
 ?>
 <?php
 // *** Validate request to login to this site.
@@ -43,7 +44,7 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-$loginFormAction = $_SERVER['PHP_SELF'];
+# $loginFormAction = $_SERVER['PHP_SELF'];
 if (isset($_GET['accesscheck'])) {
   $_SESSION['PrevUrl'] = $_GET['accesscheck'];
 }
@@ -55,14 +56,14 @@ if (isset($_POST['user'])) {
   $MM_redirectLoginSuccess = "principal.php";
   $MM_redirectLoginFailed = "Index.php";
   $MM_redirecttoReferrer = false;
-  mysql_select_db($database_softPark, $softPark);
+  # mysql_select_db($database_softPark, $softPark);
   
   $LoginRS__query=sprintf("SELECT Id, Login, Password FROM users WHERE Login=%s AND Password=%s",
-    GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
+    GetSQLValueString($mysqli, $loginUsername, "text"), GetSQLValueString($mysqli, $password, "text")); 
    
-  $LoginRS = mysql_query($LoginRS__query, $softPark) or die(mysql_error());
-  $row_LoginRS = mysql_fetch_assoc($LoginRS);
-  $loginFoundUser = mysql_num_rows($LoginRS);
+  $LoginRS = $mysqli->query($LoginRS__query) or die(mysql_error());
+  $row_LoginRS = $LoginRS->fetch_assoc();
+  $loginFoundUser = $LoginRS->num_rows;
   if ($loginFoundUser) {
      $loginStrGroup = "";
     
@@ -103,7 +104,7 @@ if (isset($_POST['user'])) {
         	</div>
             
         	<div id="options">
-           	  <form ACTION="<?php echo $loginFormAction; ?>" id="frmlogin" name="frmlogin" method="POST">
+           	  <form ACTION="" id="frmlogin" name="frmlogin" method="POST">
                		  <p>Usuario
                		     <label for="Usuario"></label>
                         <input type="text" name="user" id="user">
@@ -125,11 +126,11 @@ if (isset($_POST['user'])) {
 </body>
 </html>
 <?php
-mysql_free_result($userQuery);
+mysqli_free_result($userQuery);
 
-mysql_free_result($AccessUserQuery);
+# mysqli_free_result($AccessUserQuery);
 
-mysql_free_result($AccesUserType);
+# mysqli_free_result($AccesUserType);
 
-mysql_free_result($userTypePermission);
+# mysqli_free_result($userTypePermission);
 ?>
