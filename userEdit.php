@@ -1,13 +1,14 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($mysqli, $theValue) : mysqli_escape_string($mysqli, $theValue);
 
   switch ($theType) {
     case "text":
@@ -49,7 +50,7 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1")) {
                        GetSQLValueString(isset($_POST['Status']) ? "true" : "", "defined","1","0"),
                        GetSQLValueString($_POST['Id'], "int"));
 
-  mysql_select_db($database_softPark, $softPark);
+  #mysql_select_db($database_softPark, $softPark);
   $Result1 = mysql_query($updateSQL, $softPark) or die(mysql_error());
 
   $updateGoTo = "userList.php";
@@ -64,17 +65,17 @@ $varuserID_UserEditQuery = "0";
 if (isset($_GET["recordID"])) {
   $varuserID_UserEditQuery = $_GET["recordID"];
 }
-mysql_select_db($database_softPark, $softPark);
-$query_UserEditQuery = sprintf("SELECT * FROM users WHERE users.Id= %s", GetSQLValueString($varuserID_UserEditQuery, "int"));
-$UserEditQuery = mysql_query($query_UserEditQuery, $softPark) or die(mysql_error());
-$row_UserEditQuery = mysql_fetch_assoc($UserEditQuery);
-$totalRows_UserEditQuery = mysql_num_rows($UserEditQuery);
+#mysql_select_db($database_softPark, $softPark);
+$query_UserEditQuery = sprintf("SELECT * FROM users WHERE users.Id= %s", GetSQLValueString($mysqli, $varuserID_UserEditQuery, "int"));
+$UserEditQuery = $mysqli->query($query_UserEditQuery) or die(mysqli_error());
+$row_UserEditQuery = $UserEditQuery->fetch_assoc();
+$totalRows_UserEditQuery = mysqli_num_rows($UserEditQuery);
 
-mysql_select_db($database_softPark, $softPark);
+#mysql_select_db($database_softPark, $softPark);
 $query_UserTypeQuery = "SELECT * FROM usertype ORDER BY usertype.Name";
-$UserTypeQuery = mysql_query($query_UserTypeQuery, $softPark) or die(mysql_error());
-$row_UserTypeQuery = mysql_fetch_assoc($UserTypeQuery);
-$totalRows_UserTypeQuery = mysql_num_rows($UserTypeQuery);
+$UserTypeQuery = $mysqli->query($query_UserTypeQuery) or die(mysqli_error());
+$row_UserTypeQuery = $UserTypeQuery->fetch_assoc();
+$totalRows_UserTypeQuery = mysqli_num_rows($UserTypeQuery);
 ?>
 <!doctype html>
 <html>
@@ -171,7 +172,7 @@ do {
 </body>
 </html>
 <?php
-mysql_free_result($UserEditQuery);
+mysqli_free_result($UserEditQuery);
 
-mysql_free_result($UserTypeQuery);
+mysqli_free_result($UserTypeQuery);
 ?>

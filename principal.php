@@ -1,3 +1,4 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <!doctype html>
 <html>
@@ -12,12 +13,8 @@
   		
         <header>
         	<h1>SoftPark</h1>
-            <div id="user">
-            	<?php 
-				if((isset($_SESSION['MM_Username'])) && ($_SESSION['MM_Username'] !=""))
-                {
-                	echo Obtenernameuser($_SESSION['MM_Idusuario']);
-                }?>
+            <div id="user"> 
+				<?php include("includes/sesionUser.php"); ?>
             </div>
     	</header><!-- end header -->
         
@@ -28,10 +25,13 @@
                 		<h2>Administracion</h2>
                 	</div><!-- end title -->
                     <div class="options">
+                    	<a href="userList.php"><img src="images/advantagediagram.png"></a>
+                	</div>
+                    <div class="options">
                     	<a href="usertypeList.php"><img src="images/advantagediagram.png"></a>
                 	</div>
                     <div class="options">
-                    	<a href=""><img src="images/advantagediagram.png"></a>
+                    	<a href="StationsList.php"><img src="images/advantagediagram.png"></a>
                 	</div>
                     <div class="options">
                     	<a href=""><img src="images/advantagediagram.png"></a>

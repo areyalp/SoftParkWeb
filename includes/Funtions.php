@@ -34,18 +34,17 @@ function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", 
 //***************************************************************************************************************************************//
 //*********Funcion para obtener nombre de Usuario****************************************************************************************//
 //***************************************************************************************************************************************//
-function Obtenernameuser($identificador)
-{
-	global $database_softPark, $softPark;
-	mysql_select_db($database_softPark, $softPark);
-	$query_consultafuncion = sprintf("SELECT users.FirstName FROM users WHERE Id= %s",$identificador);
-	$consultafuncion = mysql_query($query_consultafuncion, $softPark) or die(mysql_error());
-	$row_consultafuncion = mysql_fetch_assoc($consultafuncion);
-	$totalRows_consultafuncion = mysql_num_rows($consultafuncion);
-	return $row_consultafuncion['FirstName']; 
-	mysql_free_result($consultafuncion);
-}
+function Obtenernameuser($identificador){
 
+	global $database_softPark, $softPark, $mysqli;
+	#mysql_select_db($database_softPark, $softPark);
+	$query_consultafuncion = sprintf("SELECT users.FirstName FROM users WHERE Id= %s",$identificador);
+	$consultafuncion = $mysqli->query($query_consultafuncion) or die(mysqli_error());
+	$row_consultafuncion = $consultafuncion->fetch_assoc();
+	#$totalRows_consultafuncion = $row_consultafuncion->num_rows;
+	return $row_consultafuncion['FirstName']; 
+	mysqli_free_result($consultafuncion);
+}
 //***************************************************************************************************************************************//
 //***************************************************************************************************************************************//
 //*********Funcion para obtener nombre de tipo usuario***********************************************************************************//
@@ -53,14 +52,14 @@ function Obtenernameuser($identificador)
 
 function obtenerNameUserType($identificador)
 {
-	global $database_softPark, $softPark;
-	mysql_select_db($database_softPark, $softPark);
+	global $database_softPark, $softPark, $mysqli;
+	#mysql_select_db($database_softPark, $softPark)
 	$query_consultafuncion = sprintf("SELECT usertype.Name FROM usertype WHERE id= %s",$identificador);
-	$consultafuncion = mysql_query($query_consultafuncion, $softPark) or die(mysql_error());
-	$row_consultafuncion = mysql_fetch_assoc($consultafuncion);
-	$totalRows_consultafuncion = mysql_num_rows($consultafuncion);
+	$consultafuncion = $mysqli->query($query_consultafuncion) or die(mysqli_error());
+	$row_consultafuncion = $consultafuncion->fetch_assoc();
+	#$totalRows_consultafuncion = $row_consultafuncion->num_rows;
 	return $row_consultafuncion['Name']; 
-	mysql_free_result($consultafuncion);
+	mysqli_free_result($consultafuncion);
 }
 
 //***************************************************************************************************************************************//
@@ -70,14 +69,14 @@ function obtenerNameUserType($identificador)
 
 function obteneruserpermission($identificador)
 {
-	global $database_softPark, $softPark;
-	mysql_select_db($database_softPark, $softPark);
+	global $database_softPark, $softPark, $mysqli;
+	#mysql_select_db($database_softPark, $softPark);
 	$query_consultafuncion = sprintf("SELECT * FROM usertypepermissions WHERE UserTypeId= %s",$identificador);
-	$consultafuncion = mysql_query($query_consultafuncion, $softPark) or die(mysql_error());
-	$row_consultafuncion = mysql_fetch_assoc($consultafuncion);
-	$totalRows_consultafuncion = mysql_num_rows($consultafuncion);
+	$consultafuncion = $mysqli->query($query_consultafuncion) or die(mysqli_error());
+	$row_consultafuncion = $consultafuncion->fetch_assoc();
+	#$totalRows_consultafuncion = $row_consultafuncion->num_rows;
 	return $row_consultafuncion['Name']; 
-	mysql_free_result($consultafuncion);
+	mysqli_free_result($consultafuncion);
 }
 
 //***************************************************************************************************************************************//
@@ -87,12 +86,12 @@ function obteneruserpermission($identificador)
 
 function obtenerStationType($identificador)
 {
-	global $database_softPark, $softPark;
-	mysql_select_db($database_softPark, $softPark);
+	global $database_softPark, $softPark, $mysqli;
+	#mysql_select_db($database_softPark, $softPark);
 	$query_consultafuncion = sprintf("SELECT stationstype.Name FROM stationstype WHERE id= %s",$identificador);
-	$consultafuncion = mysql_query($query_consultafuncion, $softPark) or die(mysql_error());
-	$row_consultafuncion = mysql_fetch_assoc($consultafuncion);
-	$totalRows_consultafuncion = mysql_num_rows($consultafuncion);
+	$consultafuncion = $mysqli->query($query_consultafuncion) or die(mysqli_error());
+	$row_consultafuncion = $consultafuncion->fetch_assoc();
+	#$totalRows_consultafuncion = $row_consultafuncion->num_rows;
 	return $row_consultafuncion['Name']; 
-	mysql_free_result($consultafuncion);
+	mysqli_free_result($consultafuncion);
 }

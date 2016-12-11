@@ -1,13 +1,14 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($mysqli, $theValue) : mysqli_escape_string($mysqli, $theValue);
 
   switch ($theType) {
     case "text":
@@ -38,25 +39,25 @@ if (isset($_GET['pageNum_StationQuery'])) {
 }
 $startRow_StationQuery = $pageNum_StationQuery * $maxRows_StationQuery;
 
-mysql_select_db($database_softPark, $softPark);
+#mysql_select_db($database_softPark, $softPark);
 $query_StationQuery = "SELECT * FROM stations";
 $query_limit_StationQuery = sprintf("%s LIMIT %d, %d", $query_StationQuery, $startRow_StationQuery, $maxRows_StationQuery);
-$StationQuery = mysql_query($query_limit_StationQuery, $softPark) or die(mysql_error());
-$row_StationQuery = mysql_fetch_assoc($StationQuery);
+$StationQuery = $mysqli->query($query_limit_StationQuery) or die(mysqli_error());
+$row_StationQuery = $StationQuery->fetch_assoc();
 
 if (isset($_GET['totalRows_StationQuery'])) {
   $totalRows_StationQuery = $_GET['totalRows_StationQuery'];
 } else {
-  $all_StationQuery = mysql_query($query_StationQuery);
-  $totalRows_StationQuery = mysql_num_rows($all_StationQuery);
+  $all_StationQuery = $mysqli->query($query_StationQuery);
+  $totalRows_StationQuery = $all_StationQuery->num_rows;
 }
 $totalPages_StationQuery = ceil($totalRows_StationQuery/$maxRows_StationQuery)-1;
 
-mysql_select_db($database_softPark, $softPark);
+#mysql_select_db($database_softPark, $softPark);
 $query_StationTypeQuery = "SELECT * FROM stationstype";
-$StationTypeQuery = mysql_query($query_StationTypeQuery, $softPark) or die(mysql_error());
-$row_StationTypeQuery = mysql_fetch_assoc($StationTypeQuery);
-$totalRows_StationTypeQuery = mysql_num_rows($StationTypeQuery);
+$StationTypeQuery = $mysqli->query($query_StationTypeQuery) or die(mysqli_error());
+$row_StationTypeQuery = $StationTypeQuery->fetch_assoc();
+$totalRows_StationTypeQuery = $StationTypeQuery->num_rows;
 ?>
 <!doctype html>
 <html>
@@ -72,7 +73,7 @@ $totalRows_StationTypeQuery = mysql_num_rows($StationTypeQuery);
         <header>
         	<h1>SoftPark</h1>
             <div id="user">
-            	<p> Bienvenido </p>
+            	<?php include("includes/sesionUser.php"); ?>
             </div>
     	</header><!-- end header -->
         
@@ -101,7 +102,7 @@ $totalRows_StationTypeQuery = mysql_num_rows($StationTypeQuery);
   						    <td><?php echo $row_StationQuery['MacAddress']; ?></td>
   						    <td>Modificar - Eliminar</td>
 						    </tr>
-  						  <?php } while ($row_StationQuery = mysql_fetch_assoc($StationQuery)); ?>
+  						  <?php } while ($row_StationQuery = $StationQuery->fetch_assoc()); ?>
   					</table>
 
                         
@@ -111,7 +112,7 @@ $totalRows_StationTypeQuery = mysql_num_rows($StationTypeQuery);
         </section><!-- end section -->
         
   		<footer>
-    		<p>Desarrollado para </p>
+    		<?php include("includes/footer.php"); ?>
     	</footer><!-- end footer -->
         
   </div><!-- end .container -->
@@ -119,7 +120,7 @@ $totalRows_StationTypeQuery = mysql_num_rows($StationTypeQuery);
 </body>
 </html>
 <?php
-mysql_free_result($StationQuery);
+mysqli_free_result($StationQuery);
 
-mysql_free_result($StationTypeQuery);
+mysqli_free_result($StationTypeQuery);
 ?>

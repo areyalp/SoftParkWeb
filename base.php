@@ -12,7 +12,7 @@
         <header>
         	<h1>SoftPark</h1>
             <div id="user">
-            	<p> Bienvenido </p>
+            	<?php include("includes/sesionUser.php"); ?>
             </div>
     	</header><!-- end header -->
         

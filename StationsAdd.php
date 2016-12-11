@@ -1,13 +1,14 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($mysqli, $theValue) : mysqli_escape_string($mysqli, $theValue);
 
   switch ($theType) {
     case "text":
@@ -47,7 +48,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['Configuration'], "text"),
                        GetSQLValueString($_POST['MacAddress'], "text"));
 
-  mysql_select_db($database_softPark, $softPark);
+  #mysql_select_db($database_softPark, $softPark);
   $Result1 = mysql_query($insertSQL, $softPark) or die(mysql_error());
 
   $insertGoTo = "stationList.php";
@@ -58,23 +59,23 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-mysql_select_db($database_softPark, $softPark);
+#mysql_select_db($database_softPark, $softPark);
 $query_stationsAdd = "SELECT * FROM stations";
-$stationsAdd = mysql_query($query_stationsAdd, $softPark) or die(mysql_error());
-$row_stationsAdd = mysql_fetch_assoc($stationsAdd);
-$totalRows_stationsAdd = mysql_num_rows($stationsAdd);
+$stationsAdd = $mysqli->query($query_stationsAdd) or die(mysql_error());
+$row_stationsAdd = $stationsAdd->fetch_assoc();
+$totalRows_stationsAdd = $stationsAdd->num_rows;
 
-mysql_select_db($database_softPark, $softPark);
+#mysql_select_db($database_softPark, $softPark);
 $query_stationsTypeQuery = "SELECT * FROM stationstype ORDER BY stationstype.Name";
-$stationsTypeQuery = mysql_query($query_stationsTypeQuery, $softPark) or die(mysql_error());
-$row_stationsTypeQuery = mysql_fetch_assoc($stationsTypeQuery);
-$totalRows_stationsTypeQuery = mysql_num_rows($stationsTypeQuery);
+$stationsTypeQuery = $mysqli->query($query_stationsTypeQuery) or die(mysql_error());
+$row_stationsTypeQuery = $stationsTypeQuery->fetch_assoc();
+$totalRows_stationsTypeQuery = $stationsTypeQuery->num_rows;
 
-mysql_select_db($database_softPark, $softPark);
+#mysql_select_db($database_softPark, $softPark);
 $query_stationsLevelsQuery = "SELECT * FROM levels ORDER BY levels.Name ASC";
-$stationsLevelsQuery = mysql_query($query_stationsLevelsQuery, $softPark) or die(mysql_error());
-$row_stationsLevelsQuery = mysql_fetch_assoc($stationsLevelsQuery);
-$totalRows_stationsLevelsQuery = mysql_num_rows($stationsLevelsQuery);
+$stationsLevelsQuery = $mysqli->query($query_stationsLevelsQuery) or die(mysql_error());
+$row_stationsLevelsQuery = $stationsLevelsQuery->fetch_assoc();
+$totalRows_stationsLevelsQuery = $stationsLevelsQuery->num_rows;
 ?>
 <!doctype html>
 <html>
@@ -167,9 +168,9 @@ do {
 </body>
 </html>
 <?php
-mysql_free_result($stationsAdd);
+mysqli_free_result($stationsAdd);
 
-mysql_free_result($stationsTypeQuery);
+mysqli_free_result($stationsTypeQuery);
 
-mysql_free_result($stationsLevelsQuery);
+mysqli_free_result($stationsLevelsQuery);
 ?>

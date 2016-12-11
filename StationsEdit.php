@@ -1,13 +1,14 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($mysqli, $theValue) : mysqli_escape_string($mysqli, $theValue);
 
   switch ($theType) {
     case "text":
@@ -32,14 +33,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 $idstation_StationEditQuery = "0";
-if (isset($_[GET])) {
+if (isset($_GET["recordID"])) {
   $idstation_StationEditQuery = $_[GET];
 }
-mysql_select_db($database_softPark, $softPark);
-$query_StationEditQuery = sprintf("SELECT * FROM stations WHERE stations.Id=%s", GetSQLValueString($idstation_StationEditQuery, "int"));
-$StationEditQuery = mysql_query($query_StationEditQuery, $softPark) or die(mysql_error());
-$row_StationEditQuery = mysql_fetch_assoc($StationEditQuery);
-$totalRows_StationEditQuery = mysql_num_rows($StationEditQuery);
+#mysql_select_db($database_softPark, $softPark);
+$query_StationEditQuery = sprintf("SELECT * FROM stations WHERE stations.Id=%s", GetSQLValueString($mysqli, $idstation_StationEditQuery, "int"));
+$StationEditQuery = $mysqli->query($query_StationEditQuery) or die(mysql_error());
+$row_StationEditQuery = $StationEditQuery->fetch_assoc();
+$totalRows_StationEditQuery = $StationEditQuery->num_rows;
 ?>
 <!doctype html>
 <html>
@@ -87,5 +88,5 @@ $totalRows_StationEditQuery = mysql_num_rows($StationEditQuery);
 </body>
 </html>
 <?php
-mysql_free_result($StationEditQuery);
+mysqli_free_result($StationEditQuery);
 ?>

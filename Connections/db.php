@@ -15,3 +15,12 @@ if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 ?>
+<?php
+if(is_file("includes/Funtions.php")){
+include("includes/Funtions.php");
+}else
+{
+	include("../includes/Funtions.php");
+	
+	}
+?>

@@ -67,7 +67,7 @@ $totalPages_userType = ceil($totalRows_userType/$maxRows_userType)-1;
         <header>
         	<h1>SoftPark</h1>
             <div id="user">
-            	<p> Bienvenido </p>
+            	<?php include("includes/sesionUser.php"); ?>
             </div>
     	</header><!-- end header -->
         
@@ -105,7 +105,7 @@ $totalPages_userType = ceil($totalRows_userType/$maxRows_userType)-1;
         </section><!-- end section -->
         
   		<footer>
-    		<p>Desarrollado para </p>
+    		<?php include("includes/footer.php"); ?>
     	</footer><!-- end footer -->
         
   </div><!-- end .container -->

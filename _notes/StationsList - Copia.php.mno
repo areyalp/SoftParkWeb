@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<info>
-	<infoitem key="UD_StationQuery" value="name:Id;datatype:int,name:TypeId;datatype:int,name:LevelId;datatype:int,name:Name;datatype:string,name:Description;datatype:string,name:LastTicket;datatype:int,name:Active;datatype:int,name:Configuration;datatype:string,name:MacAddress;datatype:string" />
-	<infoitem key="UD_StationTypeQuery" value="name:Id;datatype:int,name:Name;datatype:string" />
-</info>

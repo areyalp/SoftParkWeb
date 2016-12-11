@@ -1,13 +1,14 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($mysqli, $theValue) : mysqli_escape_string($mysqli, $theValue);
 
   switch ($theType) {
     case "text":
@@ -30,6 +31,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+
 
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
@@ -57,7 +59,7 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "frmPermiEdit")) {
                        GetSQLValueString(isset($_POST['CanPrintReportX']) ? "true" : "", "defined","1","0"),
                        GetSQLValueString($_POST['UserTypeId'], "int"));
 
-  mysql_select_db($database_softPark, $softPark);
+  #mysql_select_db($database_softPark, $softPark);
   $Result1 = mysql_query($updateSQL, $softPark) or die(mysql_error());
 
   $updateGoTo = "usertypepermissionList.php";
@@ -72,11 +74,11 @@ $userType_UserTypePermissionQuery = "0";
 if (isset($_GET["recordID"])) {
   $userType_UserTypePermissionQuery = $_GET["recordID"];
 }
-mysql_select_db($database_softPark, $softPark);
-$query_UserTypePermissionQuery = sprintf("SELECT * FROM usertypepermissions WHERE usertypepermissions.UserTypeId=%s", GetSQLValueString($userType_UserTypePermissionQuery, "int"));
-$UserTypePermissionQuery = mysql_query($query_UserTypePermissionQuery, $softPark) or die(mysql_error());
-$row_UserTypePermissionQuery = mysql_fetch_assoc($UserTypePermissionQuery);
-$totalRows_UserTypePermissionQuery = mysql_num_rows($UserTypePermissionQuery);
+#mysql_select_db($database_softPark, $softPark);
+$query_UserTypePermissionQuery = sprintf("SELECT * FROM usertypepermissions WHERE usertypepermissions.UserTypeId=%s", GetSQLValueString($mysqli, $userType_UserTypePermissionQuery, "int"));
+$UserTypePermissionQuery = $mysqli->query($query_UserTypePermissionQuery) or die(mysql_error());
+$row_UserTypePermissionQuery = $UserTypePermissionQuery->fetch_assoc();
+$totalRows_UserTypePermissionQuery = $UserTypePermissionQuery->num_rows;
 ?>
 <!doctype html>
 <html>
@@ -100,7 +102,7 @@ $totalRows_UserTypePermissionQuery = mysql_num_rows($UserTypePermissionQuery);
   			<div id="content">
             
             	<div class="title">
-                	<h2> Lista de usuarios</h2>
+                	<h2>Permisos</h2>
                 </div>
                 
                 <div> 
@@ -187,7 +189,7 @@ $totalRows_UserTypePermissionQuery = mysql_num_rows($UserTypePermissionQuery);
         </section><!-- end section -->
         
   		<footer>
-    		<p>Desarrollado para </p>
+    		<?php include("includes/footer.php"); ?>
     	</footer><!-- end footer -->
         
   </div><!-- end .container -->
@@ -195,5 +197,5 @@ $totalRows_UserTypePermissionQuery = mysql_num_rows($UserTypePermissionQuery);
 </body>
 </html>
 <?php
-mysql_free_result($UserTypePermissionQuery);
+mysqli_free_result($UserTypePermissionQuery);
 ?>

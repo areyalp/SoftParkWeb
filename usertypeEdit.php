@@ -39,12 +39,12 @@ if (isset($_SERVER['QUERY_STRING'])) {
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "frmusertype")) {
   $updateSQL = sprintf("UPDATE usertype SET Name=%s, `Description`=%s WHERE Id=%s",
-                       GetSQLValueString($_POST['Name'], "text"),
-                       GetSQLValueString($_POST['Description'], "text"),
-                       GetSQLValueString($_POST['Id'], "int"));
+                       GetSQLValueString($mysqli, $_POST['Name'], "text"),
+                       GetSQLValueString($mysqli, $_POST['Description'], "text"),
+                       GetSQLValueString($mysqli, $_POST['Id'], "int"));
 
-  mysql_select_db($database_softPark, $softPark);
-  $Result1 = mysql_query($updateSQL, $softPark) or die(mysql_error());
+ # mysql_select_db($database_softPark, $softPark);
+  $Result1 = $mysqli->query($updateSQL) or die(mysqli_error());
 
   $updateGoTo = "usertypeList.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -59,7 +59,7 @@ if (isset($_GET['recordID'])) {
   $idusertype_usertypeEdit = $_GET['recordID'];
 }
 # mysql_select_db($database_softPark, $softPark);
-$query_usertypeEdit = sprintf("SELECT * FROM usertype WHERE usertype.Id=%s", GetSQLValueString($idusertype_usertypeEdit, "int"));
+$query_usertypeEdit = sprintf("SELECT * FROM usertype WHERE usertype.Id=%s", GetSQLValueString($mysqli, $idusertype_usertypeEdit, "int"));
 $usertypeEdit = $mysqli->query($query_usertypeEdit) or die(mysql_error());
 $row_usertypeEdit = $usertypeEdit->fetch_assoc();
 $totalRows_usertypeEdit = $usertypeEdit->num_rows;
@@ -127,5 +127,5 @@ $totalRows_usertypeEdit = $usertypeEdit->num_rows;
 </body>
 </html>
 <?php
-mysql_free_result($usertypeEdit);
+mysqli_free_result($usertypeEdit);
 ?>

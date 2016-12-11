@@ -1,13 +1,14 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($mysqli, $theValue) : mysqli_escape_string($mysqli, $theValue);
 
   switch ($theType) {
     case "text":
@@ -38,17 +39,17 @@ if (isset($_GET['pageNum_UserTypeQuery'])) {
 }
 $startRow_UserTypeQuery = $pageNum_UserTypeQuery * $maxRows_UserTypeQuery;
 
-mysql_select_db($database_softPark, $softPark);
+#mysql_select_db($database_softPark, $softPark);
 $query_UserTypeQuery = "SELECT * FROM usertype ORDER BY usertype.Name";
 $query_limit_UserTypeQuery = sprintf("%s LIMIT %d, %d", $query_UserTypeQuery, $startRow_UserTypeQuery, $maxRows_UserTypeQuery);
-$UserTypeQuery = mysql_query($query_limit_UserTypeQuery, $softPark) or die(mysql_error());
-$row_UserTypeQuery = mysql_fetch_assoc($UserTypeQuery);
+$UserTypeQuery = $mysqli->query($query_limit_UserTypeQuery) or die(mysql_error());
+$row_UserTypeQuery =$UserTypeQuery->fetch_assoc();
 
 if (isset($_GET['totalRows_UserTypeQuery'])) {
   $totalRows_UserTypeQuery = $_GET['totalRows_UserTypeQuery'];
 } else {
-  $all_UserTypeQuery = mysql_query($query_UserTypeQuery);
-  $totalRows_UserTypeQuery = mysql_num_rows($all_UserTypeQuery);
+  $all_UserTypeQuery = $mysqli->query($query_UserTypeQuery);
+  $totalRows_UserTypeQuery = $all_UserTypeQuery->num_rows;
 }
 $totalPages_UserTypeQuery = ceil($totalRows_UserTypeQuery/$maxRows_UserTypeQuery)-1;
 ?>
@@ -66,7 +67,7 @@ $totalPages_UserTypeQuery = ceil($totalRows_UserTypeQuery/$maxRows_UserTypeQuery
         <header>
         	<h1>SoftPark</h1>
             <div id="user">
-            	<p> Bienvenido </p>
+            	<?php include("includes/sesionUser.php"); ?>
             </div>
     	</header><!-- end header -->
         
@@ -92,7 +93,7 @@ $totalPages_UserTypeQuery = ceil($totalRows_UserTypeQuery/$maxRows_UserTypeQuery
   						    <td><?php echo $row_UserTypeQuery['Name']; ?></td>
   						    <td><a href="usertypepermissionEdit.php?recordID=<?php echo $row_UserTypeQuery['Id']; ?>">Modifica - <a href="usertypepermissionDelete.php?recordID=<?php echo $row_UserTypeQuery['Id']; ?>">Eliminar</td>
 					      </tr>
-  						  <?php } while ($row_UserTypeQuery = mysql_fetch_assoc($UserTypeQuery)); ?>
+  						  <?php } while ($row_UserTypeQuery = $UserTypeQuery->fetch_assoc()); ?>
 					</table>
                         
                </div><!-- end .userlist -->
@@ -101,7 +102,7 @@ $totalPages_UserTypeQuery = ceil($totalRows_UserTypeQuery/$maxRows_UserTypeQuery
         </section><!-- end section -->
         
   		<footer>
-    		<p>Desarrollado para </p>
+    		<?php include("includes/footer.php"); ?>
     	</footer><!-- end footer -->
         
   </div><!-- end .container -->
@@ -109,5 +110,5 @@ $totalPages_UserTypeQuery = ceil($totalRows_UserTypeQuery/$maxRows_UserTypeQuery
 </body>
 </html>
 <?php
-mysql_free_result($UserTypeQuery);
+mysqli_free_result($UserTypeQuery);
 ?>

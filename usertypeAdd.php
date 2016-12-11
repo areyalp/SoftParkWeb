@@ -42,8 +42,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "frmusertypeadd")) {
                        GetSQLValueString($_POST['Name'], "text"),
                        GetSQLValueString($_POST['Description'], "text"));
 
-  mysql_select_db($database_softPark, $softPark);
-  $Result1 = mysql_query($insertSQL, $softPark) or die(mysql_error());
+  #mysql_select_db($database_softPark, $softPark);
+  $Result1 = $mysql->query($insertSQL, $softPark) or die(mysql_error());
 
   $insertGoTo = "usertypeList.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -53,11 +53,11 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "frmusertypeadd")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-mysql_select_db($database_softPark, $softPark);
+#mysql_select_db($database_softPark, $softPark);
 $query_usertypeAdd = "SELECT * FROM usertype";
-$usertypeAdd = mysql_query($query_usertypeAdd, $softPark) or die(mysql_error());
-$row_usertypeAdd = mysql_fetch_assoc($usertypeAdd);
-$totalRows_usertypeAdd = mysql_num_rows($usertypeAdd);
+$usertypeAdd = $mysqli->query($query_usertypeAdd) or die(mysql_error());
+$row_usertypeAdd = $usertypeAdd->fetch_assoc();
+$totalRows_usertypeAdd = $usertypeAdd->num_rows;
 ?>
 <!doctype html>
 <html>
@@ -73,7 +73,7 @@ $totalRows_usertypeAdd = mysql_num_rows($usertypeAdd);
         <header>
         	<h1>SoftPark</h1>
             <div id="user">
-            	<p> Bienvenido </p>
+            	<?php include("includes/sesionUser.php"); ?>
             </div>
     	</header><!-- end header -->
         
@@ -81,7 +81,7 @@ $totalRows_usertypeAdd = mysql_num_rows($usertypeAdd);
   			<div id="content">
             
             	<div class="title">
-                	<h2> Lista de usuarios</h2>
+                	<h2> Agregar Tipo de Usuario</h2>
                 </div>
                 
                 <div> 
@@ -113,7 +113,7 @@ $totalRows_usertypeAdd = mysql_num_rows($usertypeAdd);
         </section><!-- end section -->
         
   		<footer>
-    		<p>Desarrollado para </p>
+    		<?php include("includes/footer.php"); ?>
     	</footer><!-- end footer -->
         
   </div><!-- end .container -->
@@ -121,5 +121,5 @@ $totalRows_usertypeAdd = mysql_num_rows($usertypeAdd);
 </body>
 </html>
 <?php
-mysql_free_result($usertypeAdd);
+mysqli_free_result($usertypeAdd);
 ?>
