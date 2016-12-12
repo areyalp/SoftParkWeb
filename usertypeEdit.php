@@ -64,23 +64,10 @@ $usertypeEdit = $mysqli->query($query_usertypeEdit) or die(mysql_error());
 $row_usertypeEdit = $usertypeEdit->fetch_assoc();
 $totalRows_usertypeEdit = $usertypeEdit->num_rows;
 ?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>SoftPark - Principal</title>
-<link rel="stylesheet" type="text/css" href="styles/base.css"/>
-</head>
-
-<body>
-	<div id="container">
-  		
-        <header>
-        	<h1>SoftPark</h1>
-            <div id="user">
-            	<p> Bienvenido </p>
-            </div>
-    	</header><!-- end header -->
+        <?php include('header.php'); ?>
+        <div id="user"> 
+			<?php include("includes/sesionUser.php"); ?>
+		</div>
         
         <section>
   			<div id="content">
@@ -118,14 +105,7 @@ $totalRows_usertypeEdit = $usertypeEdit->num_rows;
     		</div><!-- end content -->
         </section><!-- end section -->
         
-  		<footer>
-    		<p>Desarrollado para </p>
-    	</footer><!-- end footer -->
-        
-  </div><!-- end .container -->
-  
-</body>
-</html>
+<?php include("footer.php"); ?>
 <?php
 mysqli_free_result($usertypeEdit);
 ?>

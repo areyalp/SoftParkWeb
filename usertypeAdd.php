@@ -59,67 +59,43 @@ $usertypeAdd = $mysqli->query($query_usertypeAdd) or die(mysql_error());
 $row_usertypeAdd = $usertypeAdd->fetch_assoc();
 $totalRows_usertypeAdd = $usertypeAdd->num_rows;
 ?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>SoftPark - Agregar Tipo Usuario</title>
-<link rel="stylesheet" type="text/css" href="styles/base.css"/>
-</head>
-
-<body>
-	<div id="container">
-  		
-        <header>
-        	<h1>SoftPark</h1>
-            <div id="user">
-            	<?php include("includes/sesionUser.php"); ?>
-            </div>
-    	</header><!-- end header -->
+<?php include('header.php'); ?>
+        <div id="user"> 
+			<?php include("includes/sesionUser.php"); ?>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-9 title">
+                	<h2>Agregar Perfil de Usuario</h2>
+			</div>
+		</div><!-- end row -->
+		
+		<div class="row">
+			<div id="user" class="offset-sm-3 col-xs-12 col-md-9">
+				<form method="post" name="frmusertypeadd" action="<?php echo $editFormAction; ?>">
+				<input type="hidden" name="MM_insert" value="frmusertypeadd">
+				<div class="form-group row">
+					<label for="Name" class="col-sm-2 col-form-label">Nombre:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="Name" name="Name" value="" size="32">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="Description" class="col-sm-2 col-form-label">Descripcion:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="Description" name="Description" value="" size="32">
+					</div>
+				</div>
+				<div class="form-group row">
+						<div class="offset-sm-3 col-sm-4">
+							<button type="submit" class="btn btn-primary">Aceptar</button>
+						</div>
+					</div>
+				</form>
+			</div><!-- end #user -->
+        </div><!-- end row -->
         
-        <section>
-  			<div id="content">
-            
-            	<div class="title">
-                	<h2> Agregar Tipo de Usuario</h2>
-                </div>
-                
-                <div> 
-              </div>
-                                
-                <div class="userlist">
-                  <form method="post" name="frmusertypeadd" action="<?php echo $editFormAction; ?>">
-                    <table align="center">
-                      <tr valign="baseline">
-                        <td nowrap align="right">Nombre:</td>
-                        <td><input type="text" name="Name" value="" size="32"></td>
-                      </tr>
-                      <tr valign="baseline">
-                        <td nowrap align="right">Descripción:</td>
-                        <td><input type="text" name="Description" value="" size="32"></td>
-                      </tr>
-                      <tr valign="baseline">
-                        <td nowrap align="right">&nbsp;</td>
-                        <td><input name="button" type="image" id="button" src="images/check_blue.png" alt="Aceptar"></td>
-                      </tr>
-                    </table>
-                    <input type="hidden" name="MM_insert" value="frmusertypeadd">
-                  </form>
-                  <p>&nbsp;</p>
-                </div>
-                <!-- end .userlist -->
-                
-    		</div><!-- end content -->
-        </section><!-- end section -->
-        
-  		<footer>
-    		<?php include("includes/footer.php"); ?>
-    	</footer><!-- end footer -->
-        
-  </div><!-- end .container -->
-  
-</body>
-</html>
+<?php include("footer.php"); ?>
 <?php
 mysqli_free_result($usertypeAdd);
 ?>

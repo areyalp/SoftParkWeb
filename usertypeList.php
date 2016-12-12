@@ -43,7 +43,9 @@ $startRow_userType = $pageNum_userType * $maxRows_userType;
 $query_userType = "SELECT * FROM usertype ORDER BY usertype.Name ASC";
 $query_limit_userType = sprintf("%s LIMIT %d, %d", $query_userType, $startRow_userType, $maxRows_userType);
 $userTypeResult = $mysqli->query($query_limit_userType) or die(mysqli_error());
+$userTypeResult2 = $mysqli->query($query_limit_userType) or die(mysqli_error());
 $row_userType = $userTypeResult->fetch_assoc();
+$row_userType2 = $userTypeResult2->fetch_assoc();
 
 if (isset($_GET['totalRows_userType'])) {
   $totalRows_userType = $_GET['totalRows_userType'];
@@ -53,65 +55,70 @@ if (isset($_GET['totalRows_userType'])) {
 }
 $totalPages_userType = ceil($totalRows_userType/$maxRows_userType)-1;
 ?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>SoftPark - Lista Nivel Usuario</title>
-<link rel="stylesheet" type="text/css" href="styles/base.css"/>
-</head>
-
-<body>
-	<div id="container">
-  		
-        <header>
-        	<h1>SoftPark</h1>
-            <div id="user">
-            	<?php include("includes/sesionUser.php"); ?>
-            </div>
-    	</header><!-- end header -->
+        <?php include('header.php'); ?>
+        <div id="user"> 
+			<?php include("includes/sesionUser.php"); ?>
+		</div>
         
-        <section>
-  			<div id="content">
-            
-            	<div class="title">
-                	<h2> Niveles de Usuarios</h2>
-                </div>
-                
-                <div> <a href="userAdd.php"><img src="images/user-new.png" width="64px" height="64px"></a>
-                </div>
-                                
-                <div class="userlist">
-                	
-				  <table width="100%">
-					<tr>
-    						<td>Nivel</td>
-    						<td>Descripción</td>
-    						<td>Acciones</td>
-					  </tr>
-					  <?php do { ?>
-					  <tr>
+		<div class="row">
+			<div class="col-xs-12 col-md-9 title">
+				<h2>Niveles de Usuarios</h2>
+			</div>
+		</div><!-- end row -->
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-9">
+			<a class="btn btn-secondary" href="usertypeAdd.php" role="button"><img src="images/user-new.png" width="64px" height="64px"></a>
+			</div>
+		</div><!-- end row -->
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-9">
+				<?php do { ?>
+					<!-- Modal -->
+					<div class="modal fade" id="myModal<?php echo $row_userType2['Id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel<?php echo $row_userType2['Id'];?>" aria-hidden="true" style="display: none;">
+					  <div class="modal-dialog" role="document">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel<?php echo $row_userType2['Id'];?>">Eliminar Perfil de Usuario</h4>
+						  </div>
+						  <div class="modal-body">
+							Desea eliminar el perfil de usuario <h4 class="d-inline"><?php echo $row_userType2['Name']; ?></h4>?
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<a type="button" class="btn btn-danger" href="usertypeDelete.php?recordID=<?php echo $row_userType2['Id']; ?>" role="button">Eliminar</a>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				<?php } while ($row_userType2 = $userTypeResult2->fetch_assoc()); ?>
+				
+				<table class="table">
+					<thead class="thead-default">
+						<tr>
+							<th>Nivel</th>
+    						<th>Descripción</th>
+    						<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php do { ?>
+						<tr>
   						    <td><?php echo $row_userType['Name']; ?></td>
   						    <td><?php echo $row_userType['Description']; ?></td>
-  						    <td><a href="usertypeEdit.php?recordID=<?php echo $row_userType['Id']; ?>">Modificar - <a href="usertypeDelete.php?recordID=<?php echo $row_userType['Id']; ?>">Eliminar</td>
-					      </tr>
-  						  <?php } while ($row_userType = $userTypeResult->fetch_assoc()); ?>
-					</table>
-
-                        
-              </div><!-- end .userlist -->
-                
-    		</div><!-- end content -->
-        </section><!-- end section -->
+  						    <td><a class="btn btn-warning" href="usertypeEdit.php?recordID=<?php echo $row_userType['Id']; ?>" role="button">Modificar</a> - <button class="btn btn-danger" data-toggle="modal" data-target="#myModal<?php echo $row_userType['Id'];?>">Eliminar</button></td>
+						</tr>
+  						<?php } while ($row_userType = $userTypeResult->fetch_assoc()); ?>
+					</tbody>
+				</table>
+			</div>
+		</div><!-- end row -->
         
-  		<footer>
-    		<?php include("includes/footer.php"); ?>
-    	</footer><!-- end footer -->
-        
-  </div><!-- end .container -->
-  
-</body>
-</html>
+<?php include("footer.php"); ?>
 <?php
 mysqli_free_result($userTypeResult);
 ?>

@@ -43,7 +43,9 @@ $startRow_StationQuery = $pageNum_StationQuery * $maxRows_StationQuery;
 $query_StationQuery = "SELECT * FROM stations";
 $query_limit_StationQuery = sprintf("%s LIMIT %d, %d", $query_StationQuery, $startRow_StationQuery, $maxRows_StationQuery);
 $StationQuery = $mysqli->query($query_limit_StationQuery) or die(mysqli_error());
+$StationQuery2 = $mysqli->query($query_limit_StationQuery) or die(mysqli_error());
 $row_StationQuery = $StationQuery->fetch_assoc();
+$row_StationQuery2 = $StationQuery2->fetch_assoc();
 
 if (isset($_GET['totalRows_StationQuery'])) {
   $totalRows_StationQuery = $_GET['totalRows_StationQuery'];
@@ -59,66 +61,71 @@ $StationTypeQuery = $mysqli->query($query_StationTypeQuery) or die(mysqli_error(
 $row_StationTypeQuery = $StationTypeQuery->fetch_assoc();
 $totalRows_StationTypeQuery = $StationTypeQuery->num_rows;
 ?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>SoftPark - Estaciones</title>
-<link rel="stylesheet" type="text/css" href="styles/base.css"/>
-</head>
-
-<body>
-	<div id="container">
-  		
-        <header>
-        	<h1>SoftPark</h1>
-            <div id="user">
-            	<?php include("includes/sesionUser.php"); ?>
-            </div>
-    	</header><!-- end header -->
-        
-        <section>
-  			<div id="content">
-            
-            	<div class="title">
-                	<h2> Lista de Estaciones</h2>
-                </div>
-                
-                <div> <a href="userAdd.php"><img src="images/user-new.png" width="64px" height="64px"></a>
-                </div>
-                                
-                <div class="userlist">
-               	  <table width="880" border="1">
-  						<tr>
-    						<td>Nombre</td>
-    						<td>Descripcion</td>
-    						<td>MacAddress</td>
-                            <td>Acciones</td>
-  						</tr>
-  						<?php do { ?>
+        <?php include('header.php'); ?>
+        <div id="user"> 
+			<?php include("includes/sesionUser.php"); ?>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-9 title">
+				<h2>Lista de Estaciones</h2>
+			</div>
+		</div><!-- end row -->
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-9">
+			<a class="btn btn-secondary" href="StationsAdd.php" role="button"><img src="images/user-new.png" width="64px" height="64px"></a>
+			</div>
+		</div><!-- end row -->
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-9">
+				<?php do { ?>
+					<!-- Modal -->
+					<div class="modal fade" id="myModal<?php echo $row_StationQuery2['Id'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel<?php echo $row_StationQuery2['Id'];?>" aria-hidden="true" style="display: none;">
+					  <div class="modal-dialog" role="document">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel<?php echo $row_StationQuery2['Id'];?>">Eliminar Estacion</h4>
+						  </div>
+						  <div class="modal-body">
+							Desea eliminar la estacion <h4 class="d-inline"><?php echo $row_StationQuery2['Name']; ?></h4>?
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<a type="button" class="btn btn-danger" href="StationsDelete.php?recordID=<?php echo $row_StationQuery2['Id']; ?>" role="button">Eliminar</a>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				<?php } while ($row_StationQuery2 = $StationQuery2->fetch_assoc()); ?>
+			<table class="table">
+					<thead class="thead-default">
+						<tr>
+							<th>Nombre</th>
+    						<th>Descripcion</th>
+    						<th>MacAddress</th>
+                            <th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php do { ?>
 					    <tr>
   						    <td><?php echo $row_StationQuery['Name']; ?></td>
   						    <td><?php echo $row_StationQuery['Description']; ?></td>
   						    <td><?php echo $row_StationQuery['MacAddress']; ?></td>
-  						    <td>Modificar - Eliminar</td>
-						    </tr>
-  						  <?php } while ($row_StationQuery = $StationQuery->fetch_assoc()); ?>
-  					</table>
-
-                        
-              </div><!-- end .userlist -->
-                
-   		  </div><!-- end content -->
-        </section><!-- end section -->
+  						    <td><a class="btn btn-warning" href="StationsEdit.php?recordID=<?php echo $row_StationQuery['Id']; ?>" role="button">Modificar</a> - <button class="btn btn-danger" data-toggle="modal" data-target="#myModal<?php echo $row_StationQuery['Id'];?>">Eliminar</button></td>
+						</tr>
+						<?php } while ($row_StationQuery = $StationQuery->fetch_assoc()); ?>
+					</tbody>
+				</table>
+			</div>
+		</div><!-- end row -->
         
-  		<footer>
-    		<?php include("includes/footer.php"); ?>
-    	</footer><!-- end footer -->
-        
-  </div><!-- end .container -->
-  
-</body>
-</html>
+<?php include("footer.php"); ?>
 <?php
 mysqli_free_result($StationQuery);
 

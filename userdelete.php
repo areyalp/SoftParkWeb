@@ -1,13 +1,14 @@
+<?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($mysqli, $theValue) : mysqli_escape_string($mysqli, $theValue);
 
   switch ($theType) {
     case "text":
@@ -33,10 +34,10 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 
 if ((isset($_GET['recordID'])) && ($_GET['recordID'] != "")) {
   $deleteSQL = sprintf("DELETE FROM users WHERE Id=%s",
-                       GetSQLValueString($_GET['recordID'], "int"));
+                       GetSQLValueString($mysqli, $_GET['recordID'], "int"));
 
-  mysql_select_db($database_softPark, $softPark);
-  $Result1 = mysql_query($deleteSQL, $softPark) or die(mysql_error());
+  # mysql_select_db($database_softPark, $softPark);
+  $Result1 = $mysqli->query($deleteSQL) or die(mysqli_error());
 
   $deleteGoTo = "userList.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -46,20 +47,12 @@ if ((isset($_GET['recordID'])) && ($_GET['recordID'] != "")) {
   header(sprintf("Location: %s", $deleteGoTo));
 }
 ?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>SoftPark - Principal</title>
-<link rel="stylesheet" type="text/css" href="styles/base.css"/>
-</head>
-
-<body>
-	<div id="container">
-  		
-        <header>
-        	<h1>SoftPark</h1>
-    	</header><!-- end header -->
+<?php include('header.php'); ?>
+        <div class="row">
+			<div id="user" class="col-xs-12 col-md-9"> 
+				<?php include("includes/sesionUser.php"); ?>
+			</div>
+        </div><!-- end row -->
         
         <section>
   			<div id="content">
@@ -71,11 +64,4 @@ if ((isset($_GET['recordID'])) && ($_GET['recordID'] != "")) {
     		</div><!-- end content -->
         </section><!-- end section -->
         
-  		<footer>
-    		<p>Desarrollado para </p>
-    	</footer><!-- end footer -->
-        
-  </div><!-- end .container -->
-  
-</body>
-</html>
+<?php include("footer.php"); ?>

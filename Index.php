@@ -82,12 +82,16 @@ if (isset($_POST['user'])) {
   }
 }
 ?>
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<meta charset="utf-8">
-<title>SoftPark - Inicio de Sesion</title>
-<link rel="stylesheet" type="text/css" href="styles/Style.css"/>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>SoftPark - Inicio de Sesion</title>
+	<link rel="stylesheet" type="text/css" href="styles/Style.css"/>
+	<link rel="stylesheet" type="text/css" href="styles/base.css"/>
+	<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
 </head>
 
 <body>
@@ -95,6 +99,8 @@ if (isset($_POST['user'])) {
         <div id="image">
         </div>
     </header>
+	
+	<div class="container">
     
     <section>
     	<div id="content">
@@ -119,12 +125,8 @@ if (isset($_POST['user'])) {
             
         </div>
     </section>
-    <footer>
-    	<?php include("includes/footer.php"); ?>
-    </footer>
-    
-</body>
-</html>
+	
+<?php include("footer.php"); ?>
 <?php
 mysqli_free_result($userQuery);
 

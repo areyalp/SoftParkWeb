@@ -1,107 +1,15 @@
 <?php require_once('Connections/db.php'); ?>
 <?php require_once('Connections/softPark.php'); ?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>SoftPark - Principal</title>
-<link rel="stylesheet" type="text/css" href="styles/base.css"/>
-</head>
 
-<body>
-	<div id="container">
-  		
-        <header>
-        	<h1>SoftPark</h1>
-            <div id="user"> 
-				<?php include("includes/sesionUser.php"); ?>
-            </div>
-    	</header><!-- end header -->
+		<?php include('header.php'); ?>
+		<div class="jumbotron">
+		  <h1 class="display-3"><?php include("includes/sesionUser.php"); ?>! Bienvenido a SoftParkWeb!</h1>
+		  <p class="lead">Desde esta pagina, podra gestionar su estacionamiento.</p>
+		  <hr class="my-2">
+		  <p>Ademas podra generar reportes en tiempo real, que le brindaran informacion oportuna sobre la operatividad.</p>
+		  <p class="lead">
+			<a class="btn btn-primary btn-lg" href="#" role="button">Ver Reportes</a>
+		  </p>
+		</div>
         
-        <section>
-  			<div id="content">
-            	<div class="content">
-            		<div class="title">
-                		<h2>Administracion</h2>
-                	</div><!-- end title -->
-                    <div class="options">
-                    	<a href="userList.php"><img src="images/advantagediagram.png"></a>
-                	</div>
-                    <div class="options">
-                    	<a href="usertypeList.php"><img src="images/advantagediagram.png"></a>
-                	</div>
-                    <div class="options">
-                    	<a href="StationsList.php"><img src="images/advantagediagram.png"></a>
-                	</div>
-                    <div class="options">
-                    	<a href=""><img src="images/advantagediagram.png"></a>
-                	</div>
-                    <div class="options">
-                    	<a href=""><img src="images/advantagediagram.png"></a>
-                	</div>
-                    <div class="options">
-                    	<a href=""><img src="images/advantagediagram.png"></a>
-                	</div>
-                    <div class="options">
-                    	<a href=""><img src="images/advantagediagram.png"></a>
-                	</div>
-                </div>
-                
-                <div class="content">
-                	<div class="title">
-                		<h2>Configuracion</h2>
-                	</div><!-- end title -->
-                	<div class="options">
-                    	<img src="images/tools.png">
-                	</div>
-                	<div class="options">
-                    	<img src="images/tools.png">
-                	</div>
-                	<div class="options">
-                    	<img src="images/tools.png">
-                	</div>
-                    <div class="options">
-                    	<img src="images/tools.png">
-                	</div>
-                	<div class="options">
-                    	<img src="images/tools.png">
-                	</div>
-                	<div class="options">
-                    	<img src="images/tools.png">
-                	</div>
-                  </div>
-                  
-                 <div class="content">
-                	<div class="title">
-                		<h2>Miscelaneos</h2>
-                	</div><!-- end title -->
-                	<div class="options">
-                    	<img src="images/new_ticket.png">
-                	</div>
-                	<div class="options">
-                    	<img src="images/new_ticket.png">
-                	</div>
-                	<div class="options">
-                    	<img src="images/new_ticket.png">
-                	</div>
-                    <div class="options">
-                    	<img src="images/new_ticket.png">
-                	</div>
-                	<div class="options">
-                    	<img src="images/new_ticket.png">
-                	</div>
-                	<div class="options">
-                    	<img src="images/new_ticket.png">
-                	</div>
-                 </div>
-    		</div><!-- end content -->
-        </section><!-- end section -->
-        
-  		<footer>
-    		<?php include("includes/footer.php"); ?>
-    	</footer><!-- end footer -->
-        
-  </div><!-- end .container -->
-  
-</body>
-</html>
+<?php include("footer.php"); ?>
