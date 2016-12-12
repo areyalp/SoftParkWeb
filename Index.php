@@ -91,7 +91,8 @@ if (isset($_POST['user'])) {
 	<title>SoftPark - Inicio de Sesion</title>
 	<link rel="stylesheet" type="text/css" href="styles/Style.css"/>
 	<link rel="stylesheet" type="text/css" href="styles/base.css"/>
-	<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+	<!--<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">-->
 </head>
 
 <body>
