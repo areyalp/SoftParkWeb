@@ -81,6 +81,23 @@ function obteneruserpermission($identificador)
 
 //***************************************************************************************************************************************//
 //***************************************************************************************************************************************//
+//*********Funcion para obtener nombre de tipo usuario***********************************************************************************//
+//***************************************************************************************************************************************//
+
+function obtenerUserPermissionId($identificador)
+{
+	global $database_softPark, $softPark, $mysqli;
+	#mysql_select_db($database_softPark, $softPark);
+	$query_consultafuncion = sprintf("SELECT * FROM usertypepermissions WHERE UserTypeId= %s",$identificador);
+	$consultafuncion = $mysqli->query($query_consultafuncion) or die(mysqli_error());
+	$row_consultafuncion = $consultafuncion->fetch_assoc();
+	$totalRows_consultafuncion = $row_consultafuncion->num_rows;
+	return $row_consultafuncion['UserTypeId']; 
+	mysqli_free_result($consultafuncion);
+}
+
+//***************************************************************************************************************************************//
+//***************************************************************************************************************************************//
 //*********Funcion para obtener Tipo de Estacion ****************************************************************************************//
 //***************************************************************************************************************************************//
 

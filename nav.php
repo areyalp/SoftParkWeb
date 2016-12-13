@@ -20,7 +20,7 @@
         </div>
       </li>
 	  <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Miscelaneos</a>
+        <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Consulta</a>
         <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown3">
           <a class="dropdown-item" href="#">1</a>
           <a class="dropdown-item" href="#">2</a>

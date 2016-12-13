@@ -47,7 +47,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "frmuseradd")) {
                        GetSQLValueString($mysqli, $_POST['MobilePhone'], "text"),
                        GetSQLValueString($mysqli, $_POST['Login'], "text"),
                        GetSQLValueString($mysqli, md5($_POST['Password']), "text"),
-                       GetSQLValueString($mysqli, $_POST['CreatedDate'], "date"),
+                       #GetSQLValueString($mysqli, $_POST['CreatedDate'], "date"),
                        GetSQLValueString($mysqli, isset($_POST['Status']) ? "true" : "", "defined","1","0"));
 
   # mysql_select_db($database_softPark, $softPark);
