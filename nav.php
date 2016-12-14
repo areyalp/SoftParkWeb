@@ -8,14 +8,14 @@
         <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
           <a class="dropdown-item" href="userList.php">Usuarios</a>
           <a class="dropdown-item" href="usertypeList.php">Perfiles de Usuarios</a>
-          <a class="dropdown-item" href="StationsList.php">Estaciones</a>
+          <a class="dropdown-item" href="#">3</a>
         </div>
       </li>
 	  <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="responsiveNavbarDropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Configuracion</a>
         <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown2">
-          <a class="dropdown-item" href="#">1</a>
-          <a class="dropdown-item" href="#">2</a>
+          <a class="dropdown-item" href="StationsList.php">Estaciones</a>
+          <a class="dropdown-item" href="rateList.php">Tarifas</a>
           <a class="dropdown-item" href="#">3</a>
         </div>
       </li>

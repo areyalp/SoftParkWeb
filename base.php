@@ -1,30 +1,17 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>SoftPark - Principal</title>
-<link rel="stylesheet" type="text/css" href="styles/base.css"/>
-</head>
-
-<body>
-	<div id="container">
-  		
-        <header>
-        	<h1>SoftPark</h1>
+	<?php include('header.php'); ?>
             <div id="user">
             	<?php include("includes/sesionUser.php"); ?>
             </div>
-    	</header><!-- end header -->
-        
-        <section>
-  			<div id="content">
-            
-            	<div class="title">
-                	<h2> Lista de usuarios</h2>
-                </div>
-                
-                <div> <a href="userAdd.php"><img src="images/user-new.png" width="64px" height="64px"></a>
-                </div>
+         
+      		<div class="row">
+				<div class="col-xs-12 col-md-9 title">
+					<h2>Agregar Titulo</h2>
+				</div>
+			<div class="row">
+			<div class="col-xs-12 col-md-9">
+			<a class="btn btn-secondary" href="StationsAdd.php" role="button"><img src="images/user-new.png" width="64px" height="64px"></a>
+			</div>
+		</div><!-- end row -->
                                 
                 <div class="userlist">
                 	Inserta Formularios
@@ -36,7 +23,7 @@
         </section><!-- end section -->
         
   		<footer>
-    		<?php include("includes/footer.php"); ?>
+    		<?php include("footer.php"); ?>
     	</footer><!-- end footer -->
         
   </div><!-- end .container -->

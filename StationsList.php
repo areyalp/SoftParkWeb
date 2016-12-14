@@ -40,7 +40,7 @@ if (isset($_GET['pageNum_StationQuery'])) {
 $startRow_StationQuery = $pageNum_StationQuery * $maxRows_StationQuery;
 
 #mysql_select_db($database_softPark, $softPark);
-$query_StationQuery = "SELECT * FROM stations";
+$query_StationQuery = "SELECT * FROM stations ORDER BY Name";
 $query_limit_StationQuery = sprintf("%s LIMIT %d, %d", $query_StationQuery, $startRow_StationQuery, $maxRows_StationQuery);
 $StationQuery = $mysqli->query($query_limit_StationQuery) or die(mysqli_error());
 $StationQuery2 = $mysqli->query($query_limit_StationQuery) or die(mysqli_error());
