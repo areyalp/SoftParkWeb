@@ -31,12 +31,10 @@ function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", 
   return $theValue;
 }
 }
-
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
-
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "frmrateadd")) {
   $insertSQL = sprintf("INSERT INTO rates (TransactionTypeId, Name, Description, MaxAmount, Accumulative, Tax, Template) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($mysqli, $_POST['TransactionTypeId'], "int"),
@@ -46,8 +44,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "frmrateadd")) {
 					   GetSQLValueString($mysqli, isset($_POST['Accumulative']) ? "true" : "", "defined","1","0"),
                        GetSQLValueString($mysqli, $_POST['Tax'], "double"),
                        GetSQLValueString($mysqli, isset($_POST['Template']) ? "true" : "", "defined","1","0"));
-
-  # mysql_select_db($database_softPark, $softPark);
+					   
   $Result1 = $mysqli->query($insertSQL) or die(mysqli_error());
 
   $insertGoTo = "rateList.php";
@@ -63,22 +60,21 @@ $Rateaddquery = $mysqli->query($query_Rateaddquery) or die(mysqli_error());
 $row_Rateaddquery = $Rateaddquery->fetch_assoc();
 $totalRows_Rateaddquery = $Rateaddquery->num_rows;
 
-$query_TransactionTypeQuery = "SELECT * FROM transacctiontypes";
+$query_TransactionTypeQuery = "SELECT * FROM transactiontypes";
 $TransactionTypeQuery = $mysqli->query($query_TransactionTypeQuery) or die(mysql_error());
 $row_TransactionTypeQuery = $TransactionTypeQuery->fetch_assoc();
 $totalRows_TransactionTypeQuery = $TransactionTypeQuery->num_rows;
 ?>
-<?php include('header.php'); ?>
+ 	<?php include('header.php'); ?>
         <div id="user"> 
 			<?php include("includes/sesionUser.php"); ?>
 		</div>
 		
 		<div class="row">
 			<div class="col-xs-12 col-md-9 title">
-                	<h2>Agregar Tarifa</h2>
+				<h2>Tarifas</h2>
 			</div>
 		</div><!-- end row -->
-		
 		<div class="row">
 			<div id="user" class="offset-sm-3 col-xs-12 col-md-9">
 				<form method="post" name="frmrateadd" action="<?php echo $editFormAction; ?>">
@@ -145,10 +141,16 @@ $totalRows_TransactionTypeQuery = $TransactionTypeQuery->num_rows;
 							</div>
 						</div>
 					</div>
+                    <div class="form-group row">
+						<div class="offset-sm-3 col-sm-4">
+							<button type="submit" class="btn btn-primary">Aceptar</button>
+						</div>
+					</div>
 				</form>
 			</div><!-- end #user -->
         </div><!-- end row -->
-        
+		
+        	
 <?php include("footer.php"); ?>
 <?php
 mysqli_free_result($Rateaddquery);

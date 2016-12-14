@@ -34,12 +34,12 @@ function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", 
 
 if ((isset($_GET['recordID'])) && ($_GET['recordID'] != "")) {
   $deleteSQL = sprintf("DELETE FROM rates WHERE Id=%s",
-                       GetSQLValueString($_GET['recordID'], "int"));
+                       GetSQLValueString($mysqli,$_GET['recordID'], "int"));
 
   
-  $Result1 = mysql_query($deleteSQL, $softPark) or die(mysql_error());
+  $Result1 = $mysqli->query($deleteSQL) or die(mysql_error());
 
-  $deleteGoTo = " rateList.php";
+  $deleteGoTo = "rateList.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $deleteGoTo .= (strpos($deleteGoTo, '?')) ? "&" : "?";
     $deleteGoTo .= $_SERVER['QUERY_STRING'];
@@ -47,3 +47,21 @@ if ((isset($_GET['recordID'])) && ($_GET['recordID'] != "")) {
   header(sprintf("Location: %s", $deleteGoTo));
 }
 ?>
+<?php include('header.php'); ?>
+        <div class="row">
+			<div id="user" class="col-xs-12 col-md-9"> 
+				<?php include("includes/sesionUser.php"); ?>
+			</div>
+        </div><!-- end row -->
+        
+        <section>
+  			<div id="content">
+            
+            	<div class="title">
+                	<h2> Eliminar usuario</h2>
+                </div>
+                <p>Usuario eliminado con exito</p>
+    		</div><!-- end content -->
+        </section><!-- end section -->
+        
+<?php include("footer.php"); ?>
