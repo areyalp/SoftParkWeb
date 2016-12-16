@@ -39,19 +39,18 @@ if (isset($_SERVER['QUERY_STRING'])) {
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1")) {
   $updateSQL = sprintf("UPDATE users SET UserTypeId=%s, Passport=%s, FirstName=%s, LastName=%s, Email=%s, MobilePhone=%s, Login=%s, Password=%s, Status=%s WHERE Id=%s",
-                       GetSQLValueString($_POST['UserTypeId'], "int"),
-                       GetSQLValueString($_POST['Passport'], "text"),
-                       GetSQLValueString($_POST['FirstName'], "text"),
-                       GetSQLValueString($_POST['LastName'], "text"),
-                       GetSQLValueString($_POST['Email'], "text"),
-                       GetSQLValueString($_POST['MobilePhone'], "text"),
-                       GetSQLValueString($_POST['Login'], "text"),
-                       GetSQLValueString(md5($_POST['Password']), "text"),
-                       GetSQLValueString(isset($_POST['Status']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString($_POST['Id'], "int"));
+                       GetSQLValueString($mysqli, $_POST['UserTypeId'], "int"),
+                       GetSQLValueString($mysqli, $_POST['Passport'], "text"),
+                       GetSQLValueString($mysqli, $_POST['FirstName'], "text"),
+                       GetSQLValueString($mysqli, $_POST['LastName'], "text"),
+                       GetSQLValueString($mysqli, $_POST['Email'], "text"),
+                       GetSQLValueString($mysqli, $_POST['MobilePhone'], "text"),
+                       GetSQLValueString($mysqli, $_POST['Login'], "text"),
+                       GetSQLValueString($mysqli, md5($_POST['Password']), "text"),
+                       GetSQLValueString($mysqli, isset($_POST['Status']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, $_POST['Id'], "int"));
 
-  #mysql_select_db($database_softPark, $softPark);
-  $Result1 = mysql_query($updateSQL, $softPark) or die(mysql_error());
+  $Result1 = $mysqli->query($updateSQL) or die(mysql_error());
 
   $updateGoTo = "userList.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -65,13 +64,13 @@ $varuserID_UserEditQuery = "0";
 if (isset($_GET["recordID"])) {
   $varuserID_UserEditQuery = $_GET["recordID"];
 }
-#mysql_select_db($database_softPark, $softPark);
+
 $query_UserEditQuery = sprintf("SELECT * FROM users WHERE users.Id= %s", GetSQLValueString($mysqli, $varuserID_UserEditQuery, "int"));
 $UserEditQuery = $mysqli->query($query_UserEditQuery) or die(mysqli_error());
 $row_UserEditQuery = $UserEditQuery->fetch_assoc();
 $totalRows_UserEditQuery = $UserEditQuery->num_rows;
 
-#mysql_select_db($database_softPark, $softPark);
+
 $query_UserTypeQuery = "SELECT * FROM usertype ORDER BY usertype.Name";
 $UserTypeQuery = $mysqli->query($query_UserTypeQuery) or die(mysqli_error());
 $row_UserTypeQuery = $UserTypeQuery->fetch_assoc();

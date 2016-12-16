@@ -74,7 +74,7 @@ $totalRows_StationTypeQuery = $StationTypeQuery->num_rows;
 		
 		<div class="row">
 			<div class="col-xs-12 col-md-9">
-			<a class="btn btn-secondary" href="StationsAdd.php" role="button"><img src="images/user-new.png" width="64px" height="64px"></a>
+			<a class="btn btn-secondary" href="StationsAdd.php" role="button"><img src="images/work_group.png" width="64px" height="64px"></a>
 			</div>
 		</div><!-- end row -->
 		

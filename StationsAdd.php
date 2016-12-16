@@ -51,7 +51,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   #mysql_select_db($database_softPark, $softPark);
   $Result1 = $mysqli->query($insertSQL) or die(mysqli_error());
 
-  $insertGoTo = "stationList.php";
+  $insertGoTo = "StationsList.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];

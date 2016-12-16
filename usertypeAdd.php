@@ -39,11 +39,11 @@ if (isset($_SERVER['QUERY_STRING'])) {
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "frmusertypeadd")) {
   $insertSQL = sprintf("INSERT INTO usertype (Name, `Description`) VALUES (%s, %s)",
-                       GetSQLValueString($_POST['Name'], "text"),
-                       GetSQLValueString($_POST['Description'], "text"));
+                       GetSQLValueString($mysqli, $_POST['Name'], "text"),
+                       GetSQLValueString($mysqli, $_POST['Description'], "text"));
 
   #mysql_select_db($database_softPark, $softPark);
-  $Result1 = $mysql->query($insertSQL, $softPark) or die(mysql_error());
+  $Result1 = $mysqli->query($insertSQL) or die(mysql_error());
 
   $insertGoTo = "usertypeList.php";
   if (isset($_SERVER['QUERY_STRING'])) {

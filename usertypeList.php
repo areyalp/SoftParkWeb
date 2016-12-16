@@ -62,13 +62,13 @@ $totalPages_userType = ceil($totalRows_userType/$maxRows_userType)-1;
         
 		<div class="row">
 			<div class="col-xs-12 col-md-9 title">
-				<h2>Niveles de Usuarios</h2>
+				<h2>Perfiles de Usuarios</h2>
 			</div>
 		</div><!-- end row -->
 		
 		<div class="row">
 			<div class="col-xs-12 col-md-9">
-			<a class="btn btn-secondary" href="usertypeAdd.php" role="button"><img src="images/user-new.png" width="64px" height="64px"></a>
+			<a class="btn btn-secondary" href="usertypeAdd.php" role="button"><img src="images/users_2.png" width="64px" height="64px"></a>
 			</div>
 		</div><!-- end row -->
 		
