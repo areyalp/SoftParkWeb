@@ -43,29 +43,30 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "frmusertype")) {
                        GetSQLValueString($mysqli, $_POST['Description'], "text"),
                        GetSQLValueString($mysqli, $_POST['Id'], "int"));
 					   
-	$updateSQL2 = sprintf("UPDATE usertypepermissions SET LogToWeb=%s, LogToProgram=%s, ViewUserTypes=%s, CreateUserTypes=%s, ViewUsers=%s, CreateUsers=%s, ViewStations=%s, CreateStations=%s, ViewLoginLog=%s, ViewSummary=%s, ViewTransactions=%s, ViewStats=%s, ViewVehicleTypes=%s, CreateVehicleTypes=%s, CanCheckOut=%s, CanPrintReportZ=%s, CanPrintReportX=%s WHERE UserTypeId=%s",
-                       GetSQLValueString(isset($mysqli, $_POST['LogToWeb']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['LogToProgram']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['ViewUserTypes']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['CreateUserTypes']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['ViewUsers']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['CreateUsers']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['ViewStations']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['CreateStations']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['ViewLoginLog']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['ViewSummary']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['ViewTransactions']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['ViewStats']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['ViewVehicleTypes']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['CreateVehicleTypes']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['CanCheckOut']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['CanPrintReportZ']) ? "true" : "", "defined","1","0"),
-                       GetSQLValueString(isset($mysqli, $_POST['CanPrintReportX']) ? "true" : "", "defined","1","0"),
+	$Result1 = $mysqli->query($updateSQL) or die(mysqli_error());
+					   
+	$updateSQL = sprintf("UPDATE usertypepermissions SET LogToWeb=%s, LogToProgram=%s, ViewUserTypes=%s, CreateUserTypes=%s, ViewUsers=%s, CreateUsers=%s, ViewStations=%s, CreateStations=%s, ViewLoginLog=%s, ViewSummary=%s, ViewTransactions=%s, ViewStats=%s, ViewVehicleTypes=%s, CreateVehicleTypes=%s, CanCheckOut=%s, CanPrintReportZ=%s, CanPrintReportX=%s WHERE UserTypeId=%s",
+                       GetSQLValueString($mysqli, isset($_POST['LogToWeb']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['LogToProgram']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['ViewUserTypes']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['CreateUserTypes']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['ViewUsers']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['CreateUsers']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['ViewStations']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['CreateStations']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['ViewLoginLog']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['ViewSummary']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['ViewTransactions']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['ViewStats']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['ViewVehicleTypes']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['CreateVehicleTypes']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['CanCheckOut']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['CanPrintReportZ']) ? "true" : "", "defined","1","0"),
+                       GetSQLValueString($mysqli, isset($_POST['CanPrintReportX']) ? "true" : "", "defined","1","0"),
                        GetSQLValueString($mysqli, $_POST['UserTypeId'], "int"));				   
 
- # mysql_select_db($database_softPark, $softPark);
   $Result1 = $mysqli->query($updateSQL) or die(mysqli_error());
-  #$Result2 = $mysqli->query($updateSQL2) or die(mysqli_error());
+  
   $updateGoTo = "usertypeList.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
@@ -77,9 +78,9 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "frmusertype")) {
 $idusertype_usertypeEdit = "0";
 $userType_UserTypePermissionQuery = "0";
 
-if (isset($_GET['recordID'])) {
-  $idusertype_usertypeEdit = $_GET['recordID'];
-  $userType_UserTypePermissionQuery = $idusertype_usertypeEdit;
+if (isset($_GET["recordID"])) {
+  $idusertype_usertypeEdit = $_GET["recordID"];
+  $userType_UserTypePermissionQuery = $_GET["recordID"];
 }
 
 
@@ -123,6 +124,10 @@ $totalRows_UserTypePermissionQuery = $UserTypePermissionQuery->num_rows;
                     
                   
                   <p>&nbsp;</p>
+                  <div class="title">
+                	<h2>Permisología</h2>
+                </div>
+                <p>&nbsp;</p>
                   	
 						<table width="100%">
   							<tr>
@@ -196,8 +201,7 @@ $totalRows_UserTypePermissionQuery = $UserTypePermissionQuery->num_rows;
      							<td><input name="button" type="image" id="button" src="images/check_blue.png" alt="Aceptar"></td>
      						</tr>
 </table>
-                    <input type="hidden" name="MM_update" value="frmusertype">
-                    <input type="hidden" name="MM_update" value="frmusertype">
+                     <input type="hidden" name="MM_update" value="frmusertype">
                     <input type="hidden" name="Id" value="<?php echo $row_usertypeEdit['Id']; ?>">
                     <input type="hidden" name="UserTypeId" value="<?php echo $row_UserTypePermissionQuery['UserTypeId']; ?>">
                   </form>
