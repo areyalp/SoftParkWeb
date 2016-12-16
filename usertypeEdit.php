@@ -127,7 +127,6 @@ $totalRows_UserTypePermissionQuery = $UserTypePermissionQuery->num_rows;
                   <div class="title">
                 	<h2>Permisología</h2>
                 </div>
-                <p>&nbsp;</p>
                   	
 						<table width="100%">
   							<tr>
@@ -191,16 +190,16 @@ $totalRows_UserTypePermissionQuery = $UserTypePermissionQuery->num_rows;
     							<td colspan="2">&nbsp;</td>
     							<td colspan="2">&nbsp;</td>
   							</tr>
-   							
+   							<p>&nbsp;</p>
                             <tr>
      							<td>&nbsp;</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
-     							<td><input name="button" type="image" id="button" src="images/check_blue.png" alt="Aceptar"></td>
+     							<td><button type="submit" class="btn btn-primary">Aceptar</button></td>
      						</tr>
-</table>
+					</table>
                      <input type="hidden" name="MM_update" value="frmusertype">
                     <input type="hidden" name="Id" value="<?php echo $row_usertypeEdit['Id']; ?>">
                     <input type="hidden" name="UserTypeId" value="<?php echo $row_UserTypePermissionQuery['UserTypeId']; ?>">

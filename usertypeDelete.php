@@ -35,9 +35,13 @@ if ((isset($_GET['recordID'])) && ($_GET['recordID'] != "")) {
   $deleteSQL = sprintf("DELETE FROM usertype WHERE Id=%s",
                        GetSQLValueString($mysqli, $_GET['recordID'], "int"));
 
-  # mysql_select_db($database_softPark, $softPark);
   $Result1 = $mysqli->query($deleteSQL) or die(mysqli_error());
+  
+  $deleteSQL = sprintf("DELETE FROM usertypepermissions WHERE UserTypeId=%s",
+                       GetSQLValueString($mysqli, $_GET['recordID'], "int"));
 
+  $Result1 = $mysqli->query($deleteSQL) or die(mysqli_error());
+  
   $deleteGoTo = "usertypeList.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $deleteGoTo .= (strpos($deleteGoTo, '?')) ? "&" : "?";
