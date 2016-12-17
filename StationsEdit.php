@@ -109,7 +109,7 @@ $totalRows_SationsLevelsQuery = $SationsLevelsQuery->num_rows;
 					</div>
                     
 				<div class="form-group row">
-					<label for="LevelId" class="col-sm-2 col-form-label">LevelId:</label>
+					<label for="LevelId" class="col-sm-2 col-form-label">Level:</label>
 					<div class="col-sm-4">
 						<select name="LevelId">
                         	<?php do {  ?>
