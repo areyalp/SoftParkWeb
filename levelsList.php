@@ -108,7 +108,7 @@ $totalPages_levelsList_query = ceil($totalRows_levelsList_query/$maxRows_levelsL
 					    <tr>
   						    <td><?php echo $row_levelsList_query['Name']; ?></td>
   						    <td><?php echo $row_levelsList_query['Description']; ?></td>
-  						    <td><a class="btn btn-warning" href="levelsAdd.php?recordID=<?php echo $row_levelsList_query['Id']; ?>" role="button">Modificar</a> - <button class="btn btn-danger" data-toggle="modal" data-target="#myModal<?php echo $row_levelsList_query['Id'];?>">Eliminar</button></td>
+  						    <td><a class="btn btn-warning" href="levelsEdit.php?recordID=<?php echo $row_levelsList_query['Id']; ?>" role="button">Modificar</a> - <button class="btn btn-danger" data-toggle="modal" data-target="#myModal<?php echo $row_levelsList_query['Id'];?>">Eliminar</button></td>
 						</tr>
 						<?php } while ($row_levelsList_query = $levelsList_query->fetch_assoc()); ?>
 					</tbody>
