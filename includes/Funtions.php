@@ -75,7 +75,7 @@ function obteneruserpermission($identificador)
 	$consultafuncion = $mysqli->query($query_consultafuncion) or die(mysqli_error());
 	$row_consultafuncion = $consultafuncion->fetch_assoc();
 	#$totalRows_consultafuncion = $row_consultafuncion->num_rows;
-	return $row_consultafuncion['Name']; 
+	return $row_consultafuncion['LogToWeb']; 
 	mysqli_free_result($consultafuncion);
 }
 

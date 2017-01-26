@@ -1,4 +1,5 @@
 <?php require_once('Connections/db.php'); ?>
+<?php require_once('Connections/softPark.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($mysqli, $theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
@@ -37,11 +38,12 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "frmlevelEdit")) {
-  $updateSQL = sprintf("UPDATE levels SET Name=%s, `Description`=%s, ExitOption=%s, Minutes=%s WHERE Id=%s",
+  $updateSQL = sprintf("UPDATE levels SET Name=%s, `Description`=%s, ExitOption=%s, Minutes=%s, Places=%s WHERE Id=%s",
                        GetSQLValueString($mysqli, $_POST['Name'], "text"),
                        GetSQLValueString($mysqli, $_POST['Description'], "text"),
                        GetSQLValueString($mysqli, $_POST['ExitOption'], "int"),
                        GetSQLValueString($mysqli, $_POST['Minutes'], "int"),
+					   GetSQLValueString($mysqli, $_POST['Places'], "int"),
                        GetSQLValueString($mysqli, $_POST['Id'], "int"));
 
     $Result1 = $mysqli->query($updateSQL) or die(mysql_error());
@@ -72,7 +74,7 @@ $totalRows_levelsEditQuery = $levelsEditQuery->num_rows;
          
       		<div class="row">
 				<div class="col-xs-12 col-md-9 title">
-					<h2>Editar Levels</h2>
+					<h2>Editar Niveles</h2>
 				</div>
 			                                
                <div class="row">
@@ -100,12 +102,18 @@ $totalRows_levelsEditQuery = $levelsEditQuery->num_rows;
 				</div>
                 
                 <div class="form-group row">
-					<label for="Minutes" class="col-sm-2 col-form-label">Minutes:</label>
+					<label for="Minutes" class="col-sm-2 col-form-label">Minutos:</label>
 					<div class="col-sm-4">
                     	<input type="text" class="form-control" id="Minutes" name="Minutes" value="<?php echo htmlentities($row_levelsEditQuery['Minutes'], ENT_COMPAT, 'utf-8'); ?>" size="32">
 					</div>
 				</div>
 				
+                <div class="form-group row">
+					<label for="Places" class="col-sm-2 col-form-label">N° de Puestos:</label>
+					<div class="col-sm-4">
+                    	<input type="text" class="form-control" id="Places" name="Places" value="<?php echo htmlentities($row_levelsEditQuery['Places'], ENT_COMPAT, 'utf-8'); ?>" size="32">
+					</div>
+				</div>
                 
 				<div class="form-group row">
 						<div class="offset-sm-3 col-sm-4">
@@ -113,7 +121,7 @@ $totalRows_levelsEditQuery = $levelsEditQuery->num_rows;
 						</div>
 					</div>
                     <input type="hidden" name="MM_update" value="frmlevelEdit">
-                    <input type="hidden" name="Id" value="<?php echo $row_levelEditQuery['Id']; ?>">
+                    <input type="hidden" name="Id" value="<?php echo $row_levelsEditQuery['Id']; ?>">
 				</form>
 			</div><!-- end #user -->
         </div><!-- end row -->

@@ -147,7 +147,7 @@ $totalRows_SationsLevelsQuery = $SationsLevelsQuery->num_rows;
 					<div class="col-sm-4">
 						<div class="form-check row">
 							<label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="Active" value=""  <?php if (!(strcmp($row_StationEditQuery['Active'],""))) {echo "checked=\"checked\"";} ?>>
+                            <input type="checkbox" class="form-check-input" name="Active" value=""  <?php if (!(strcmp($row_StationEditQuery['Active'],"1"))) {echo "checked=\"checked\"";} ?>>
 							</label>
 						</div>
 					</div>

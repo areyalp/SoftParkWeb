@@ -140,53 +140,53 @@ $totalRows_UserTypePermissionQuery = $UserTypePermissionQuery->num_rows;
                             
   							<tr>
     							<td>Web </td>
-    							<td><input type="checkbox" name="LogToWeb" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['LogToWeb'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="LogToWeb" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['LogToWeb'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Ver Tipo Usuarios</td>
-    							<td><input type="checkbox" name="ViewUserTypes" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewUserTypes'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="ViewUserTypes" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewUserTypes'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Ver Estaciones</td>
-    							<td><input type="checkbox" name="ViewStations" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewStations'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="ViewStations" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewStations'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Inicio de Sesion</td>
-    							<td><input type="checkbox" name="ViewLoginLog2" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewLoginLog'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="ViewLoginLog" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewLoginLog'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Ver Tipos de Vehículos</td>
-    							<td><input type="checkbox" name="ViewVehicleTypes" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewVehicleTypes'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="ViewVehicleTypes" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewVehicleTypes'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Reporte Z</td>
-    							<td><input type="checkbox" name="CanPrintReportZ" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CanPrintReportZ'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="CanPrintReportZ" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CanPrintReportZ'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
   							</tr>
                             
   							<tr>
     							<td>Programa</td>
-    							<td><input type="checkbox" name="LogToProgram" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['LogToProgram'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="LogToProgram" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['LogToProgram'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Crear Tipos Usuarios</td>
-    							<td><input type="checkbox" name="CreateUserTypes" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CreateUserTypes'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="CreateUserTypes" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CreateUserTypes'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Crear Estaciones</td>
-    							<td><input type="checkbox" name="CreateStations" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CreateStations'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="CreateStations" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CreateStations'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Ver Sumario:</td>
-    							<td><input type="checkbox" name="ViewSummary" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewSummary'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="ViewSummary" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewSummary'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Crear Tipos de Vehículo</td>
-    							<td><input type="checkbox" name="CreateVehicleTypes" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CreateVehicleTypes'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="CreateVehicleTypes" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CreateVehicleTypes'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>Reporte X</td>
-    							<td><input type="checkbox" name="CanPrintReportX" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CanPrintReportX'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="CanPrintReportX" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CanPrintReportX'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
   							</tr>
                             
   							<tr>
     							<td colspan="2">&nbsp;</td>
     							<td>Ver Usuarios</td>
-    							<td><input type="checkbox" name="ViewUsers" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewUsers'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="ViewUsers" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewUsers'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td colspan="2">&nbsp;</td>
     							<td>Ver Transacciones</td>
-    							<td><input type="checkbox" name="ViewTransactions" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewTransactions'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="ViewTransactions" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewTransactions'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td>CanCheckOut</td>
-    							<td><input type="checkbox" name="CanCheckOut" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CanCheckOut'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?>></td>
+    							<td><input type="checkbox" name="CanCheckOut" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CanCheckOut'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?>></td>
     							<td colspan="2">&nbsp;</td>
   							</tr>
   							
                             <tr>
     							<td colspan="2">&nbsp;</td>
     							<td>Crear Usuarios</td>
-    							<td><input type="checkbox" name="CreateUsers" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CreateUsers'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="CreateUsers" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['CreateUsers'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td colspan="2">&nbsp;</td>
     							<td>ViewStats:</td>
-    							<td><input type="checkbox" name="ViewStats" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewStats'], ENT_COMPAT, 'utf-8'),""))) {echo "checked=\"checked\"";} ?> /></td>
+    							<td><input type="checkbox" name="ViewStats" value=""  <?php if (!(strcmp(htmlentities($row_UserTypePermissionQuery['ViewStats'], ENT_COMPAT, 'utf-8'),"1"))) {echo "checked=\"checked\"";} ?> /></td>
     							<td colspan="2">&nbsp;</td>
     							<td colspan="2">&nbsp;</td>
   							</tr>

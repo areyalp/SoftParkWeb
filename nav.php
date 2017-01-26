@@ -16,7 +16,7 @@
         <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown2">
           <a class="dropdown-item" href="StationsList.php">Estaciones</a>
           <a class="dropdown-item" href="rateList.php">Tarifas</a>
-          <a class="dropdown-item" href="levelsList.php">Levels</a>
+          <a class="dropdown-item" href="levelsList.php">Niveles</a>
         </div>
       </li>
 	  <li class="nav-item dropdown">

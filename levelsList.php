@@ -61,7 +61,7 @@ $totalPages_levelsList_query = ceil($totalRows_levelsList_query/$maxRows_levelsL
 		
 		<div class="row">
 			<div class="col-xs-12 col-md-9 title">
-				<h2>Levels</h2>
+				<h2>Niveles</h2>
 			</div>
 		</div><!-- end row -->
 		

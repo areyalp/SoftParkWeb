@@ -1,33 +1,16 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>SoftPark - Principal</title>
-<link rel="stylesheet" type="text/css" href="styles/base.css"/>
-</head>
+<?php require_once('Connections/db.php'); ?>
+<?php require_once('Connections/softPark.php'); ?>
 
-<body>
-	<div id="container">
-  		
-        <header>
-        	<h1>SoftPark</h1>
-            <div id="user">
-            	<p> Bienvenido </p>
-            </div>
-    	</header><!-- end header -->
+		<?php include('header.php'); ?>
+        <?php echo $arrays[] = obteneruserpermission(1);?>
+		<div class="jumbotron">
+		  <h1 class="display-3"><?php include("includes/sesionUser.php"); ?>! Bienvenido a SoftParkWeb!</h1>
+		  <p class="lead">Desde esta pagina, podra gestionar su estacionamiento.</p>
+		  <hr class="my-2">
+		  <p>Ademas podra generar reportes en tiempo real, que le brindaran informacion oportuna sobre la operatividad.</p>
+		  <p class="lead">
+			<a class="btn btn-primary btn-lg" href="#" role="button">Ver Reportes</a>
+		  </p>
+		</div>
         
-        <section>
-  			<div id="content">
-            	
-    			<p> Insertar Elementos a Mostrar en las Capas</p>
-    		</div><!-- end content -->
-        </section><!-- end section -->
-        
-  		<footer>
-    		<p>Desarrollado para </p>
-    	</footer><!-- end footer -->
-        
-  </div><!-- end .container -->
-  
-</body>
-</html>
+<?php include("footer.php"); ?>

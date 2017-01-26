@@ -36,11 +36,12 @@ if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "frmrateadd")) {
-  $insertSQL = sprintf("INSERT INTO levels (Name, Description, ExitOption, Minutes) VALUES (%s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO levels (Name, Description, ExitOption, Minutes, Places) VALUES (%s, %s, %s, %s, %s)",
                        GetSQLValueString($mysqli, $_POST['Name'], "text"),
                        GetSQLValueString($mysqli, $_POST['Description'], "text"),
 					   GetSQLValueString($mysqli, $_POST['ExitOption'], "int"),
-                       GetSQLValueString($mysqli, $_POST['Minutes'], "int"));
+					   GetSQLValueString($mysqli, $_POST['Minutes'], "int"),
+                       GetSQLValueString($mysqli, $_POST['Places'], "int"));
 					   
   $Result1 = $mysqli->query($insertSQL) or die(mysqli_error());
 
@@ -98,6 +99,13 @@ $totalRows_LevelsAddquery = $LevelsAddquery->num_rows;
 						<label for="Minutes" class="col-sm-3 col-form-label">Minutos</label>
 						<div class="col-sm-4">
 							<input type="text" class="form-control" id="Minutes" name="Minutes" value="" size="32">
+						</div>
+					</div>
+                    
+                    <div class="form-group row">
+						<label for="Places" class="col-sm-3 col-form-label">N° de Puestos</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="Places" name="Places" value="" size="32">
 						</div>
 					</div>
 					
