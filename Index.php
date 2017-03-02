@@ -68,10 +68,11 @@ if (isset($_POST['user'])) {
      $loginStrGroup = "";
     
 	if (PHP_VERSION >= 5.1) {session_regenerate_id(true);} else {session_regenerate_id();}
-    //declare two session variables and assign them
+    //declare four session variables and assign them
     $_SESSION['MM_Username'] = $loginUsername;
     $_SESSION['MM_UserGroup'] = $loginStrGroup;	      
-	$_SESSION['MM_Idusuario'] = $row_LoginRS["Id"];
+    $_SESSION['MM_Idusuario'] = $row_LoginRS["Id"];
+    $_SESSION['MM_IdTypeUser'] = $row_LoginRS["UserTypeId"];
     if (isset($_SESSION['PrevUrl']) && false) {
       $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];	
     }
@@ -92,7 +93,6 @@ if (isset($_POST['user'])) {
 	<link rel="stylesheet" type="text/css" href="styles/Style.css"/>
 	<link rel="stylesheet" type="text/css" href="styles/base.css"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
-	<!--<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">-->
 </head>
 
 <body>
@@ -131,9 +131,4 @@ if (isset($_POST['user'])) {
 <?php
 mysqli_free_result($userQuery);
 
-# mysqli_free_result($AccessUserQuery);
-
-# mysqli_free_result($AccesUserType);
-
-# mysqli_free_result($userTypePermission);
 ?>

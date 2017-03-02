@@ -2,7 +2,13 @@
 <?php require_once('Connections/softPark.php'); ?>
 
 		<?php include('header.php'); ?>
-        <?php echo $arrays[] = obteneruserpermission(1);?>
+        <?php $arrays = obteneruserpermission(3);
+			
+			echo $arrays[1];
+			echo $arrays[2];
+			echo $arrays[3];
+			echo $arrays[4];
+		?>
 		<div class="jumbotron">
 		  <h1 class="display-3"><?php include("includes/sesionUser.php"); ?>! Bienvenido a SoftParkWeb!</h1>
 		  <p class="lead">Desde esta pagina, podra gestionar su estacionamiento.</p>

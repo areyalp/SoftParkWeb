@@ -8,7 +8,6 @@
         <div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown">
           <a class="dropdown-item" href="userList.php">Usuarios</a>
           <a class="dropdown-item" href="usertypeList.php">Perfiles de Usuarios</a>
-          <a class="dropdown-item" href="#">3</a>
         </div>
       </li>
 	  <li class="nav-item dropdown">
@@ -17,6 +16,7 @@
           <a class="dropdown-item" href="StationsList.php">Estaciones</a>
           <a class="dropdown-item" href="rateList.php">Tarifas</a>
           <a class="dropdown-item" href="levelsList.php">Niveles</a>
+          <a class="dropdown-item" href="configsList.php">Otros</a>
         </div>
       </li>
 	  <li class="nav-item dropdown">
